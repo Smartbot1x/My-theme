@@ -6,13 +6,33 @@ add_post_type_support( "page", "excerpt" );
 
 //Shortcodes
 
-function adder ($atts=["a"=>0, "b"=>0]){
-    return $atts["a"] + $atts["b"];
+function adder ($atts = []){
+    
+    $atts = shortcode_atts([
+        "a" => 0,
+        "b" => 0
+    ], $atts, 'add');
+
+    // Ensure numeric values for arithmetic
+    return intval($atts["a"]) + intval($atts["b"]);
 }
 
 
 
 add_shortcode("add", "adder");
+
+function get_phone_number($atts=["link"=>""]) {
+    $number = get_theme_mod("mytheme_phone_number", "Default value");
+    if ($atts["link"]==""){
+        return $number;
+    }
+    else{
+        return "<a href='tel:" .$number. "'>" .$number. "</a>";
+    }
+
+}
+
+add_shortcode("tlf", "get_phone_number");
 
 //Actions
 
@@ -80,7 +100,7 @@ add_image_size("slider", 1200, 300, true);
 
 //Wigets
 
-function niller_footer_widgets () {
+function Mohamed_footer_widgets () {
     register_sidebar(
         [
             "name"          =>"Footer widget 1",
@@ -116,23 +136,90 @@ function niller_footer_widgets () {
     );
 
 }
-add_action("widgets_init", "niller_footer_widgets");
+add_action("widgets_init", "Mohamed_footer_widgets");
 
 
 
 //Customizer
+//For at hente værdien fra et felt i vores templates 
+//skal vi bruge feltets id (f.eks. "mytheme_phone_number")
+//echo get_theme_mod('mytheme_phone_number', 'Default value'); 
 
- add_theme_support( 'customize-selective-refresh-widgets' );
+function mytheme_customize_register($wp_customize) {
+    // Step 1: Add a section
+    $wp_customize->add_section(
+        'mytheme_extra_settings', 
+        [
+        "title"    => "Tema indstillinger",
+        "priority" => 30
+        ]
+    );
 
-function themeslug_customize_register( $wp_customize ) {
-  
-   $wp_customize->add_setting( 'accent_color', array(
-    'default' => '#f72525',
-    'sanitize_callback' => 'sanitize_hex_color',
-    ) );
+    // Step 2: Add a setting
+    $wp_customize->add_setting(
+        "mytheme_phone_number",
+        [
+        "default"           => "",
+        "sanitize_callback" => "sanitize_text_field"
+        ]
+    );
 
+    // Step 3: Add a control
+    $wp_customize->add_control(
+        "mytheme_text_field",
+        [
+        "label"    => "Firma Telefonnummer",
+        "section"  => "mytheme_extra_settings",
+        "settings" => "mytheme_phone_number",
+        "type"     => "text"
+        ]
+    );
+
+
+    //Gentag Step 2 og 3 for flere felter
+    // Step 2: Add a setting
+    $wp_customize->add_setting(
+        "mytheme_enable_slider",
+        [
+        "default"           => "",
+        "sanitize_callback" => "sanitize_text_field"
+        ]
+    );
+
+    // Step 3: Add a control
+    $wp_customize->add_control(
+        "mytheme_checkbox",
+        [
+        "label"    => "Slideshow on/off",
+        "section"  => "mytheme_extra_settings",
+        "settings" => "mytheme_enable_slider",
+        "type"     => "checkbox"
+        ]
+    );
+    //Gentag Step 2 og 3 for flere felter
+    // Step 2: Add a setting
+    $wp_customize->add_setting(
+        "mytheme_footer_color",
+        [
+        "default"           => "",
+        "sanitize_callback" => "sanitize_text_field"
+        ]
+    );
+
+    // Step 3: Add a control
+    $wp_customize->add_control(
+        "mytheme_color_picker",
+        [
+        "label"    => "Mørk footer farve",
+        "section"  => "mytheme_extra_settings",
+        "settings" => "mytheme_footer_color",
+        "type"     => "checkbox"
+        ]
+    );
 }
-add_action( 'customize_register', 'themeslug_customize_register' );
+add_action("customize_register", "mytheme_customize_register");
+ 
+
 
 
 
@@ -145,6 +232,14 @@ function my_theme_scripts_and_styles(){
         get_stylesheet_uri()
     );
 
+    // Skills & Tools component styles
+    wp_enqueue_style(
+        "Skills_Tools_Stylesheet",
+        get_template_directory_uri()."/components/SkillsTools.css",
+        [],
+        "1.0.0"
+    );
+
     wp_enqueue_script(
         "Slider",
         get_template_directory_uri()."/scripts/slider.js",
@@ -155,6 +250,24 @@ function my_theme_scripts_and_styles(){
             "in_footer" => false
         ]
     );
+
+    // Skills & Tools component JavaScript
+    wp_enqueue_script(
+        "Skills_Tools_Script",
+        get_template_directory_uri()."/scripts/skills-tools.js",
+        [],
+        "1.0.0",
+        [
+            "strategy" =>"defer",
+            "in_footer" => true
+        ]
+    );
 }
 
 add_action("wp_enqueue_scripts", "my_theme_scripts_and_styles");
+
+// Ensure the darkmode component is loaded early so it can register its enqueue handler
+$dm_path = get_template_directory() . '/components/Darkmode.php';
+if ( file_exists( $dm_path ) ) {
+    require_once $dm_path;
+}

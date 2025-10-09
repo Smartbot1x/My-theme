@@ -3,7 +3,7 @@ get_template_part("components/head");
 ?>
 <body>
     <?php
-    echo slider();
+    slider();
     ?>
    <?php
    get_template_part("components/header");

@@ -16,6 +16,7 @@
  */
 
 /*Resets*/
+@import url(nav.css);
 img,
 svg,
 video,
@@ -28,13 +29,35 @@ object {
 
 body {
   background: rgba(221, 0, 255, 0.149);
+  margin: 0 auto;
+  width: 1200px;
 }
 
 /*LAyout*/
-.niller-footer,
-.niller-header {
+.Header__container {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: white;
+  background: #da6f2b;
+}
+.footer__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: white;
+  background: #da6f2b;
+  position: static;
+  bottom: 0;
+  right: 50%;
 }
 
 /*
