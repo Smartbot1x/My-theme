@@ -7,21 +7,26 @@ get_template_part("components/head");
    <?php
    get_template_part("components/header");
     ?>
-  <!--     <?php
+     <!--  <?php
    echo slider();
-    ?> -->
-  <?php
-    if (is_front_page()){
-        if (get_theme_mod("mytheme_enable_slider")=="1"){
-            slider();
-        }   
-    }
-    ?>
+    ?>  -->
+  
     <main class="main__container">
         <?php
-          // Include Skills & Tools component
-          get_template_part('components/SkillsTools');
-          ?>
+        
+        if (is_front_page()) {
+            hero();
+        }
+        ?>
+        <!-- <?php
+        if (is_front_page()){
+            if (get_theme_mod("mytheme_enable_slider")=="1"){
+                  skills_tools();
+            }   
+        }
+        ?> -->
+     
+        
         <?php 
 if ( have_posts() ) {
 	while ( have_posts() ) {
@@ -34,6 +39,30 @@ if ( have_posts() ) {
 } // end if
 ?>
     </main>
+       <?php
+        // Contact form on front page
+        if (is_front_page()) {
+            get_template_part('components/contactform');
+        }
+        ?>
+     
+      <!--   <?php
+        
+          if (is_front_page()) {
+              echo do_shortcode('[projects count="6" orderby="date" order="DESC"]');
+          }
+          ?>
+ -->
+    
+    <?php
+    if (is_front_page()){
+      
+        if (get_theme_mod("mytheme_enable_slider")=="1"){
+          
+            slider();
+        }   
+    }
+    ?> 
     <?php
    get_template_part("components/footer");
     ?>

@@ -1,0 +1,224 @@
+/* Scoped hero styles */
+.hero.main {
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  /* height: 100vh; */
+  position: relative;
+  font-family: sans-serif;
+}
+
+/* .hero.main * {
+  margin: 0;
+  padding: 0;
+}
+ */
+.navbar {
+  width: 86%;
+  display: flex;
+  margin: auto;
+  padding: 15px 0;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .logo {
+  width: 160px;
+  cursor: pointer;
+  margin-top: -3%;
+  margin-left: -2%;
+}
+
+.hero.main ul li {
+  list-style: none;
+  display: inline-block;
+  padding: 10px 16px;
+}
+
+.hero.main ul li a {
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: darkslategray;
+  margin-top: -3%;
+  transition: 0.4s ease;
+}
+
+.hero.main ul li a:hover {
+  color: rgb(230, 104, 59);
+}
+
+.hero.main .info {
+  margin-left: 7%;
+  margin-top: 6%;
+}
+
+.hero.main .info h1 {
+  font-size: 65px;
+  color: rgb(36, 32, 30);
+}
+.hero.main .info h3 {
+  font-size: 18px;
+  letter-spacing: 1px;
+  line-height: 24px;
+}
+.hero.main .info span {
+  color: rgb(230, 104, 59);
+}
+
+.hero.main .info a {
+  text-decoration: none;
+  color: #fff;
+  background: rgb(36, 32, 30);
+  margin: 26px 0;
+  padding: 10px 18px;
+  border-radius: 10px;
+  display: inline-block;
+  transition: 0.4s ease;
+}
+
+.hero.main .info a:hover {
+  background: rgb(59, 174, 209);
+}
+
+.hero.main .image {
+  width: 30%;
+  height: 60%;
+  position: absolute;
+  right: 100px;
+}
+
+.hero.main .image img {
+  position: absolute;
+  /* height: 146%; */
+  left: 40%;
+  transform: translate(-55%);
+  transition: left 2s ease;
+  border-radius: 50%;
+  top: -133%;
+}
+
+.hero.main .icons a {
+  text-decoration: none;
+  color: #000;
+}
+.hero.main .icons ion-icon {
+  margin-left: 7%;
+  color: #000;
+  margin-right: -60px;
+  font-size: 40px;
+  transition: 0.4s ease;
+}
+.hero.main .icons ion-icon:hover {
+  color: rgb(59, 174, 209);
+}
+
+.hero.main .wrapper {
+  display: inline-flex;
+  list-style: none;
+  margin-left: 67px;
+}
+
+.hero.main .wrapper .icon {
+  position: relative;
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 15px;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.hero.main .wrapper .tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  background: #ffffff;
+  color: #ffffff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.hero.main .wrapper .tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #ffffff;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.hero.main .wrapper .icon:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.hero.main .wrapper .icon:hover span,
+.hero.main .wrapper .icon:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Brand hovers */
+.hero.main .wrapper .facebook:hover,
+.hero.main .wrapper .facebook:hover .tooltip,
+.hero.main .wrapper .facebook:hover .tooltip::before {
+  background: #1877f2;
+  color: #ffffff;
+}
+.hero.main .wrapper .twitter:hover,
+.hero.main .wrapper .twitter:hover .tooltip,
+.hero.main .wrapper .twitter:hover .tooltip::before {
+  background: #1da1f2;
+  color: #ffffff;
+}
+.hero.main .wrapper .instagram:hover,
+.hero.main .wrapper .instagram:hover .tooltip,
+.hero.main .wrapper .instagram:hover .tooltip::before {
+  background: #e4405f;
+  color: #ffffff;
+}
+.hero.main .wrapper .github:hover,
+.hero.main .wrapper .github:hover .tooltip,
+.hero.main .wrapper .github:hover .tooltip::before {
+  background: #333333;
+  color: #ffffff;
+}
+.hero.main .wrapper .youtube:hover,
+.hero.main .wrapper .youtube:hover .tooltip,
+.hero.main .wrapper .youtube:hover .tooltip::before {
+  background: #cd201f;
+  color: #ffffff;
+}
+.hero.main .wrapper .linkedin:hover,
+.hero.main .wrapper .linkedin:hover .tooltip,
+.hero.main .wrapper .linkedin:hover .tooltip::before {
+  background: #0a66c2;
+  color: #ffffff;
+}
+
+/* Dark mode styles */
+.darkmode .hero.main .info h1 {
+  color: var(--text-color);
+}
+.darkmode .hero.main .wrapper .icon {
+  background: var(--base-variant);
+}
+.darkmode .hero.main .icons a {
+  color: var(--text-color);
+}

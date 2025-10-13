@@ -25,9 +25,11 @@ function mytheme_darkmode_toggle() {
 
         function setDarkmode(active) {
             if (active) {
+                document.documentElement.classList.add('darkmode');
                 document.body.classList.add('darkmode');
                 localStorage.setItem('darkmode', 'active');
             } else {
+                document.documentElement.classList.remove('darkmode');
                 document.body.classList.remove('darkmode');
                 localStorage.setItem('darkmode', '');
             }
